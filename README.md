@@ -23,7 +23,7 @@ Si VSCode est utilisé, alors installez `es6-string-html`. Nous en aurons besoin
 
 Le code du workshop est formatté avec [Prettier](https://prettier.io/). Sur VSCode, on le trouve dans les extensions avec l'ID suivant: `esbenp.prettier-vscode`.
 
-Ce n'est pas obligatoire d'utiliser ce formatteur spécifique, mais personnellement je le trouve bien :smile:
+Ce n'est pas obligatoire d'utiliser ce formatteur spécifique, mais personnellement je le trouve bien 😄
 
 ## CDN Vue
 
@@ -65,7 +65,7 @@ Il faut ensuite relié l'app VueJS à l'élément HTML avec l'id app.
 </script>
 ```
 
-## Expression {{}}
+## Expression}
 
 Ajoutons quelques éléments à notre app Vue.
 Ajoutons un titre (h1) à notre application à l'aide de Vue.
@@ -470,7 +470,7 @@ computed: {
 }
 ```
 
-## Amélioration du carrousel
+## Amélioration du carrousel ici
 
 Maintenant nous allons simplifier et mettre à profit notre apprentissage des propriétés.
 Supprimons la var `image = 'url'` dans data et remplaçons la par `selectedImage = 0` qui sera un index pointant sur l'image actuellement sélectionnée de notre carrousel.
@@ -687,14 +687,14 @@ app.component("review-form", {
     `
   <form>
     <h3>Laissez un message</h3>
-    
+  
     <div class="form-group">
       <label for="name">Nom</label>
       <input id="name" class="form-control">
     </div>
 
     <div class="form-group">
-      <label for="review">Message</label>      
+      <label for="review">Message</label>    
       <textarea id="review" class="form-control"></textarea>
     </div>
 

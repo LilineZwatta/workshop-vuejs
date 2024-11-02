@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
+    <script src="https://unpkg.com/vue@3.5.12/dist/vue.global.js"></script>
     <meta charset="utf-8" />
     <title>Ceci est un titre</title>
 
@@ -18,8 +19,76 @@
     <!--Importation de Vue-->
   </head>
   <body>
+    <div id="app">
+      <h1><a :href="link">{{ title }}</a></h1>
+      <p>{{ description }}</p>
+
+      <!-- Image principale affichée -->
+      <img height="200" :src="carouselImages[selectedImage].image" :class="{ outOfStock: !inStock }" />
+
+      <p v-if="inStock">Disponible</p>
+      <p v-else>Plus de stock</p>
+
+      <p v-show="onSale">En Vente !</p>
+
+      <div>
+        <span
+          v-for="(carouselImage, index) in carouselImages"
+          :key="carouselImage.id"
+          @mouseover="updateImage(index)"
+        >
+          <img height="50" alt="carouselImage.text" :src="carouselImage.image" />
+        </span>
+      </div>
+
+      <!-- Détails du produit -->
+      <ul>
+        <li
+          v-for="detail in details"
+          :key="detail.id"
+          :style="{ color: detail.color }"
+        >
+          {{ detail.text }}
+        </li>
+      </ul>
+
+      <!-- Liste des tailles de paquets -->
+      <ul>
+        <li v-for="packageSize in packageSizes" :key="packageSize.id">
+          {{ packageSize.quantity }} - {{ packageSize.price }}
+        </li>
+      </ul>
+
+      <!-- Bouton Ajouter au panier -->
+      <button
+        @click="addToCart"
+        :style="styles.roundButton"
+        :disabled="stock <= 0"
+        :class="{ disabledButton: stock <= 0 }"
+      >
+        Ajouter au panier
+      </button>
+
+      <!-- Bouton Retirer du panier -->
+      <button
+      @click="removeFromCart"
+      :style="styles.roundButton"
+      :disabled="stock <= 0"
+      :class="{ disabledButton: stock <= 0 }"
+    >
+      Retirer du panier
+    </button>
+    <!-- Affichage du panier -->
+    <div :class="[cart > 0 ? 'cartFilled' : '']">
+      Panier({{ cart }})
+    </div>
+    <!-- Scripts -->
+    <script src="./main.js"></script>
+
+
+
     <!--Point d'entrée de l'app Vue-->
-    <h1 style="color: green">You are READY for the workshop ;)</h1>
+    <!--<h1 style="color: green">You are READY for the workshop ;)</h1>-->
 
     <!--Bootstrap-->
     <script
@@ -35,5 +104,8 @@
 
     <!--Notre JS contenant notre app Vue-->
     <script src="./main.js"></script>
+    <script>
+      const mountedApp = app.mount('#app');
+    </script>
   </body>
 </html>
