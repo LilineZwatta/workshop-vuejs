@@ -22,9 +22,18 @@
     <div id="app">
       <h1><a :href="link">{{ title }}</a></h1>
       <p>{{ description }}</p>
+          <!-- Affichage du panier -->
+    <div :class="[cart > 0 ? 'cartFilled' : '']">
+      Panier({{ cart }})
+    </div>
 
       <!-- Image principale affichée -->
-      <img height="200" :src="carouselImages[selectedImage].image" :class="{ outOfStock: !inStock }" />
+      <div>
+        <img height="200"
+          v-bind:src="image"
+          :class="[ inStock ? '' : 'out-of-stock-img' ]">
+      </div>
+      <img height="200" :src="carouselImages[selectedImage].image" :class="{ outOfStock: is_out_of_stock }" />
 
       <p v-if="inStock">Disponible</p>
       <p v-else>Plus de stock</p>
@@ -63,8 +72,8 @@
       <button
         @click="addToCart"
         :style="styles.roundButton"
-        :disabled="stock <= 0"
-        :class="{ disabledButton: stock <= 0 }"
+        :disabled="is_out_of_stock"
+        :class="{ disabledButton: is_out_of_stock }"
       >
         Ajouter au panier
       </button>
@@ -73,15 +82,12 @@
       <button
       @click="removeFromCart"
       :style="styles.roundButton"
-      :disabled="stock <= 0"
-      :class="{ disabledButton: stock <= 0 }"
+      :disabled="is_out_of_stock"
+      :class="{ disabledButton: is_out_of_stock }"
     >
       Retirer du panier
     </button>
-    <!-- Affichage du panier -->
-    <div :class="[cart > 0 ? 'cartFilled' : '']">
-      Panier({{ cart }})
-    </div>
+
     <!-- Scripts -->
     <script src="./main.js"></script>
 

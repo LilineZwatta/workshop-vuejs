@@ -75,6 +75,9 @@ const app = Vue.createApp({
   computed: {
     title() {
       return this.action + ' ' + this.brand;
+    },
+    is_out_of_stock() {
+      return this.inStock<=0;
     }
   },
   styles: {
