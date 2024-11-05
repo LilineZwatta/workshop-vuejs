@@ -5,14 +5,21 @@ const app = Vue.createApp({
       brand: 'Nespresso',
       link: 'https://www.nespresso.com',
       cart: 0,
-      premium: true // Variable premium à true ou false
+      premium: true 
     };
+    
+  },
+  methods: {
+    updateCart() {
+      this.cart += 1;
+    }
   },
   computed: {
     title() {
       return this.action + ' ' + this.brand;
     }
-  }
+  },
+
 });
 
 
