@@ -1,14 +1,14 @@
-app.component('product-display', {
+app.component("product-display", {
   props: {
     premium: {
       type: Boolean,
-      required: true
-    }
+      required: true,
+    },
   },
-  emits: ['add-to-cart'],
+  emits: ["add-to-cart", "remove-from-cart"],
   template:
-  /*html*/
-  `
+    /*html*/
+    `
     <div>
       <p>{{ description }}</p>
       <div>
@@ -46,54 +46,57 @@ app.component('product-display', {
   `,
   data() {
     return {
-      description: 'Achetez vos capsules de café en ligne',
+      description: "Achetez vos capsules de café en ligne",
       selectedImage: 0,
       inStock: true,
       onSale: true,
-      
+
       details: [
-        { id: 1, text: 'Doux', color: '#6C99C6' },
-        { id: 2, text: 'Harmonieux', color: '#BF9E74' }
-        
+        { id: 1, text: "Doux", color: "#6C99C6" },
+        { id: 2, text: "Harmonieux", color: "#BF9E74" },
       ],
       styles: {
         roundButton: {
-          borderRadius: '20px',
-          padding: '10px',
-          backgroundColor: 'rgb(0, 114, 180)',
-          color: 'white',
-          cursor: 'pointer'
-        }
+          borderRadius: "20px",
+          padding: "10px",
+          backgroundColor: "rgb(0, 114, 180)",
+          color: "white",
+          cursor: "pointer",
+        },
       },
-  
+
       carouselImages: [
-        { id: 1, text: 'Capsule 1', image: './assets/images/colombia.png' },
-        { id: 2, text: 'Capsule 2', image: './assets/images/colombia_de_cote.png' },
-        { id: 3, text: 'Tasse', image: './assets/images/colombia_tasse.png' },
-        { id: 4, text: 'Paquet', image: './assets/images/colombia_paquet.png' }
+        { id: 1, text: "Capsule 1", image: "./assets/images/colombia.png" },
+        {
+          id: 2,
+          text: "Capsule 2",
+          image: "./assets/images/colombia_de_cote.png",
+        },
+        { id: 3, text: "Tasse", image: "./assets/images/colombia_tasse.png" },
+        { id: 4, text: "Paquet", image: "./assets/images/colombia_paquet.png" },
       ],
       packageSizes: [
-        { id: 1, quantity: 10, price: '4.50 CHF' },
-        { id: 2, quantity: 20, price: '8.50 CHF' },
-        { id: 3, quantity: 30, price: '12.00 CHF' }
-      ]
-      
+        { id: 1, quantity: 10, price: "4.50 CHF" },
+        { id: 2, quantity: 20, price: "8.50 CHF" },
+        { id: 3, quantity: 30, price: "12.00 CHF" },
+      ],
     };
   },
   methods: {
     addToCart() {
       // this.$root.cart += 1;
-      this.$emit('add-to-cart');
-      
+      this.$emit("add-to-cart", this.carouselImages[this.selectedImage].id);
     },
     removeFromCart() {
-      if (this.$root.cart > 0) {
-        this.$root.cart -= 1;
-      }
+      // this.$root.cart -= 1;
+      this.$emit(
+        "remove-from-cart",
+        this.carouselImages[this.selectedImage].id
+      );
     },
     updateImage(imageIndex) {
       this.selectedImage = imageIndex;
-    }
+    },
   },
   computed: {
     isOutOfStock() {
@@ -101,10 +104,10 @@ app.component('product-display', {
     },
     shipping() {
       if (this.premium) {
-        return 'Free'
+        return "Free";
       }
-    
-      return 2.99
-    }
+
+      return 2.99;
+    },
   },
 });

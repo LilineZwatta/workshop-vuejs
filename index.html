@@ -15,10 +15,21 @@
 <body>
   <div id="app">
     <h1><a :href="link">{{ title }}</a></h1>
-    <div :class="[cart > 0 ? 'cartFilled' : '']">Panier({{ cart }})</div>
+    <div :class="[cart.length > 0 ? 'cartFilled' : '']">Panier({{ cart.length }})</div>
+
+    <!-- <div>
+      <p>Articles dans le panier : {{ cart.length }}</p>
+      <ul>
+        <li v-for="id in cart" :key="id">
+          Image ID : {{ id }}
+        </li>
+      </ul>
+    </div> -->
+    
 
     <!-- Utilisation du composant ProductDisplay -->
-    <product-display :premium="premium" @add-to-cart="updateCart"></product-display>
+    <product-display :premium="premium" @add-to-cart="updateCart" @remove-from-cart="removeFromCart"></product-display>
+
   </div>
 
     <!--Notre JS contenant notre app Vue-->
